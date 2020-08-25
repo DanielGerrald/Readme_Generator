@@ -1,5 +1,31 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
+const badges =[{
+  name: "APACHE 2.0", 
+  image: "[![License: APACHE 2.0](https://img.shields.io/badge/License-APACHE%202.0-red.svg)]",
+  url: "https://opensource.org/licenses/APACHE-2.0"
+},
+{
+  name: "BSD 3",
+  image: "[![License: BSD 3](https://img.shields.io/badge/License-BSD%203-green.svg)]",
+  url: "https://opensource.org/licenses/BSD-3-Clause"
+},
+{
+  name: "GPL 3.0",
+  image: "[![License: GPL 3.0](https://img.shields.io/badge/License-GPL%203.0-purple.svg)]",
+  url: "https://opensource.org/licenses/GPL-3.0"
+},
+{
+  name: "MIT",
+  image: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]",
+  url: "https://opensource.org/licenses/MIT"
+},
+{
+  name: "None",
+  image: "[![License: None](https://img.shields.io/badge/license-None-blue.svg)]",
+  url: "https://opensource.org/osd-annotated"
+},
+];
 
 inquirer.prompt([
   {
@@ -56,55 +82,13 @@ inquirer.prompt([
 }
 ]).then(function(data) {
 
-  const filename = data.title.toLowerCase().split(' ').join('') + ".md";
-  const badges =[{
-    name: "APACHE 2.0", 
-    image: "[![License: APACHE 2.0](https://img.shields.io/badge/License-APACHE%202.0-red.svg)]",
-    url: "https://opensource.org/licenses/APACHE-2.0"
-  },
-  {
-    name: "BSD 3",
-    image: "[![License: BSD 3](https://img.shields.io/badge/License-BSD%203-green.svg)]",
-    url: "https://opensource.org/licenses/BSD-3-Clause"
-  },
-  {
-    name: "GPL 3.0",
-    image: "[![License: GPL 3.0](https://img.shields.io/badge/License-GPL%203.0-purple.svg)]",
-    url: "https://opensource.org/licenses/GPL-3.0"
-  },
-  {
-    name: "MIT",
-    image: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]",
-    url: "https://opensource.org/licenses/MIT"
-  },
-  {
-    name: "None",
-    image: "[![License: None](https://img.shields.io/badge/license-None-blue.svg)]",
-    url: "https://opensource.org/osd-annotated"
-  },
-];
+  const filename = data.title.toUpperCase().split(' ').join('') + ".md";
 
-
-  var badge;
-  if (data.license === "APACHE 2.0"){
-      badge = badges[0]
-  }
-  else if (data.license === "BSD 3"){
-      badge = badges[1]
-  }
-  else if (data.license === "GPL 3.0"){
-      badge = badges[2]
-  }
-  else if (data.license === "MIT"){
-      badge = badges[3]
-}
-  else (badge = badges[4]);
-
-
+  const badge = badges.filter(license => license.name === data.license);
 
   fs.writeFile(filename, 
     `# ${data.title.toUpperCase()}
-  ${badge.image}(${badge.url})
+  ${badge[0].image}(${badge[0].url})
   ## Description
   ${data.description}
   ## Table of Contents
@@ -119,11 +103,11 @@ inquirer.prompt([
   ## License
   The Linces type chosen for this app is:
 
-  **${badge.name}**
+  **${badge[0].name}**
   
   For more details on this license type please use the following link: 
 
-  ${badge.url}
+  ${badge[0].url}
   ## Contributing
   ${data.contribution}
   ## Tests
