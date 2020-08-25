@@ -12,7 +12,7 @@
   ## Installation
   To install you will need to download the files from the repository and then install the required nodes like inquirer.
   ## License
-  The Linces type chosen for this app is:
+  The license type chosen for this app is:
 
   **MIT**
 
