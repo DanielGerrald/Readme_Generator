@@ -24,9 +24,9 @@
   ## Tests
   Run the index.js file in your terminal using node and follow the prompts. Then review the resulting md file in preview mode and verify that it is displaying as you wish.
   
-<figure class="video_container">
-<iframe src="https://drive.google.com/file/d/1uM9F2L4DrpA29XSVDFKbLc9LyMZ7FDbR/preview" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+
+[![ReadMe Generator](./readme-generator.jpg)](https://drive.google.com/file/d/1uM9F2L4DrpA29XSVDFKbLc9LyMZ7FDbR/preview "ReadMe Generator")
+
 
   ## Questions
   If you have any questions please feel free to contact me via the links below: 
