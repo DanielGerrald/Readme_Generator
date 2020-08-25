@@ -27,10 +27,11 @@ inquirer.prompt([
     message: " Please choose a license.",
     name: "license",
     choices: [
-        "Eclipse Public License 1.0",
-        "The MIT License",
-        "Mozilla Public License 2.0",
-        "The Unlicense",
+        "APACHE 2.0",
+        "BSD 3",
+        "GPL 3.0",
+        "MIT",
+        "None",
     ]
 },
 {
@@ -56,37 +57,80 @@ inquirer.prompt([
 ]).then(function(data) {
 
   var filename = data.title.toLowerCase().split(' ').join('') + ".md";
+  var badges =[{
+    name: "APACHE 2.0", 
+    image: "[![License: APACHE 2.0](https://img.shields.io/badge/License-APACHE%202.0-red.svg)]",
+    url: "https://opensource.org/licenses/APACHE-2.0"
+  },
+  {
+    name: "BSD 3",
+    image: "[![License: BSD 3](https://img.shields.io/badge/License-BSD%203-green.svg)]",
+    url: "https://opensource.org/licenses/BSD-3-Clause"
+  },
+  {
+    name: "GPL 3.0",
+    image: "[![License: GPL 3.0](https://img.shields.io/badge/License-GPL%203.0-purple.svg)]",
+    url: "https://opensource.org/licenses/GPL-3.0"
+  },
+  {
+    name: "MIT",
+    image: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]",
+    url: "https://opensource.org/licenses/MIT"
+  },
+  {
+    name: "None",
+    image: "[![License: None](https://img.shields.io/badge/license-None-blue.svg)]",
+    url: "https://opensource.org/osd-annotated"
+  },
+];
+
+
   var badge;
-  if (data.license === "Eclipse Public License 1.0"){
-      badge = "[![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)](https://opensource.org/licenses/EPL-1.0)"
+  if (data.license === "APACHE 2.0"){
+      badge = badges[0]
   }
-  else if (data.license === "The MIT License"){
-      badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+  else if (data.license === "BSD 3"){
+      badge = badges[1]
   }
-  else if (data.license === "Mozilla Public License 2.0"){
-      badge = "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)"
+  else if (data.license === "GPL 3.0"){
+      badge = badges[2]
   }
-  else (badge = "[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)")
+  else if (data.license === "MIT"){
+      badge = badges[3]
+}
+  else (badge = badges[4]);
+
+
 
   fs.writeFile(filename, 
-    "# " + data.title.toUpperCase() + "\n" + badge + "\n" +
-    "## Description" + "\n" + data.description + "\n" + 
-    "## Table of Contents" + "\n" + 
-    "1. [Installation](#installation)" + "\n" + 
-    "2. [Usage](#usage)" + "\n" +
-    "3. [License](#license)" + "\n" +
-    "4. [Contributing](#contributing)" + "\n" +
-    "5. [Tests](#tests)" + "\n" +
-    "6. [Questions](#questions)" + "\n" +
-    "## Installation" + "\n" + data.install + "\n" +
-    "## Usage" + "\n" + data.usage + "\n" +
-    "## License" + "\n" + "The Linces type chosen for this app is:  " + "**"+data.license+"**" + "\n" +
-    "## Contributing" + "\n" + data.contribution + "\n" +
-    "## Tests" + "\n" + data.tests + "\n" +
-    "## Questions" + "\n" + 
-    "If you have any questions please feel free to contact me via the links below: " + "\n" +
-    "* GitHub: " + "["+data.userName+"](https://github.com/"+data.userName+")" + "\n" +
-    "* E-Mail: " + data.email
+    `# ${data.title.toUpperCase()}
+  ${badge.image}(${badge.url})
+  ## Description
+  ${data.description}
+  ## Table of Contents
+  1. [Installation](#installation)
+  2. [Usage](#usage)
+  3. [License](#license)
+  4. [Contributing](#contributing)
+  5. [Tests](#tests)
+  6. [Questions](#questions)
+  ## Installation
+  ${data.install}
+  ## License
+  The Linces type chosen for this app is:
+
+  **${badge.name}**
+  For more details on this license type please use the following link: 
+  
+  ${badge.url}
+  ## Contributing
+  ${data.contribution}
+  ## Tests
+  ${data.tests}
+  ## Questions
+  If you have any questions please feel free to contact me via the links below:
+  * GitHub: [${data.userName}](https://github.com/${data.userName})
+  * E-Mail: ${data.email}`
     , function(err) {
 
     if (err) {
