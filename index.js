@@ -101,7 +101,7 @@ inquirer.prompt([
   ## Installation
   ${data.install}
   ## License
-  The Linces type chosen for this app is:
+  The license type chosen for this app is:
 
   **${badge[0].name}**
   
