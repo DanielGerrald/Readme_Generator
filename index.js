@@ -1,5 +1,5 @@
-var inquirer = require("inquirer");
-var fs = require('fs');
+const inquirer = require("inquirer");
+const fs = require('fs');
 
 inquirer.prompt([
   {
@@ -56,8 +56,8 @@ inquirer.prompt([
 }
 ]).then(function(data) {
 
-  var filename = data.title.toLowerCase().split(' ').join('') + ".md";
-  var badges =[{
+  const filename = data.title.toLowerCase().split(' ').join('') + ".md";
+  const badges =[{
     name: "APACHE 2.0", 
     image: "[![License: APACHE 2.0](https://img.shields.io/badge/License-APACHE%202.0-red.svg)]",
     url: "https://opensource.org/licenses/APACHE-2.0"
