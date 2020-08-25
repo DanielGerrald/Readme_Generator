@@ -120,8 +120,9 @@ inquirer.prompt([
   The Linces type chosen for this app is:
 
   **${badge.name}**
-  For more details on this license type please use the following link: 
   
+  For more details on this license type please use the following link: 
+
   ${badge.url}
   ## Contributing
   ${data.contribution}
